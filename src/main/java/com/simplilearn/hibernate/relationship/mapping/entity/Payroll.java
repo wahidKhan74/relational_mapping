@@ -1,10 +1,12 @@
 package com.simplilearn.hibernate.relationship.mapping.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,8 +30,10 @@ public class Payroll {
 	@Column(name="pf")
 	private String pf;
 	
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="payroll")
+	private Employee employee;
 	
-	//constructor
+	//constru(ctor
 	public Payroll() { }
 
 
@@ -91,6 +95,17 @@ public class Payroll {
 	public void setPf(String pf) {
 		this.pf = pf;
 	}
+	
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 
 	//override toString()
 	@Override

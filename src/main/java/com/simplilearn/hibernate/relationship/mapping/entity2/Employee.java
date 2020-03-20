@@ -1,4 +1,4 @@
-package com.simplilearn.hibernate.relationship.mapping.entity;
+package com.simplilearn.hibernate.relationship.mapping.entity2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="ems_employee_detail")
+@Table(name="ems_employee_detail2")
 public class Employee {
 	
 	@Id
@@ -35,12 +37,12 @@ public class Employee {
 	@Column(name="dept")
 	private String dept;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="emp_id")
-	private Payroll payroll;
-	
-	@OneToMany(cascade= { CascadeType.DETACH, CascadeType.MERGE, 
-			CascadeType.PERSIST,CascadeType.REFRESH},mappedBy="employee")
+		
+	@ManyToMany(cascade= { CascadeType.DETACH, CascadeType.MERGE, 
+			CascadeType.PERSIST,CascadeType.REFRESH})
+	@JoinTable(name="employee_project_rel",
+	joinColumns=@JoinColumn(name="emp_id"),
+	inverseJoinColumns= @JoinColumn(name="project_id"))
 	private List<Project> projects;
 	
 	// add empty constructor
@@ -96,13 +98,6 @@ public class Employee {
 	}
 	
 	
-	public Payroll getPayroll() {
-		return payroll;
-	}
-
-	public void setPayroll(Payroll payroll) {
-		this.payroll = payroll;
-	}
 	
 	public List<Project> getProjects() {
 		return projects;
@@ -125,6 +120,5 @@ public class Employee {
 			projects = new ArrayList<Project>();
 		}
 		projects.add(pro);
-		pro.setEmployee(this);
 	}
 }
