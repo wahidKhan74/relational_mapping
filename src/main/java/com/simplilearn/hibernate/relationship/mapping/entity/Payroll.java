@@ -1,0 +1,102 @@
+package com.simplilearn.hibernate.relationship.mapping.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="ems_employee_payroll")
+public class Payroll {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="emp_id")
+	private int id;
+	
+	@Column(name="basic_pay")
+	private String basicPay;
+	
+	@Column(name="gross_pay")
+	private String grossPay;
+	
+	@Column(name="net_pay")
+	private String netPay;
+	
+	@Column(name="pf")
+	private String pf;
+	
+	
+	//constructor
+	public Payroll() { }
+
+
+	public Payroll(String basicPay, String grossPay, String netPay, String pf) {
+		super();
+		this.basicPay = basicPay;
+		this.grossPay = grossPay;
+		this.netPay = netPay;
+		this.pf = pf;
+	}
+
+	//getter and setter
+	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getBasicPay() {
+		return basicPay;
+	}
+
+
+	public void setBasicPay(String basicPay) {
+		this.basicPay = basicPay;
+	}
+
+
+	public String getGrossPay() {
+		return grossPay;
+	}
+
+
+	public void setGrossPay(String grossPay) {
+		this.grossPay = grossPay;
+	}
+
+
+	public String getNetPay() {
+		return netPay;
+	}
+
+
+	public void setNetPay(String netPay) {
+		this.netPay = netPay;
+	}
+
+
+	public String getPf() {
+		return pf;
+	}
+
+
+	public void setPf(String pf) {
+		this.pf = pf;
+	}
+
+	//override toString()
+	@Override
+	public String toString() {
+		return "Payroll [id=" + id + ", basicPay=" + basicPay + ", grossPay=" + grossPay + ", netPay=" + netPay
+				+ ", pf=" + pf + "]";
+	}
+
+}
